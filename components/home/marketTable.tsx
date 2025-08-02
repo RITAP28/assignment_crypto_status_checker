@@ -4,14 +4,20 @@ import React, { useState } from "react";
 import PaginationButtons from "./paginationButtons";
 import Searchbar from "./searchbar";
 import Filter from "./filter";
+import { useRouter } from "next/navigation";
 
 interface IMarketTableProps {
   allCoins: ICoinsProps[];
 }
 
 const MarketTable: React.FC<IMarketTableProps> = ({ allCoins }) => {
+  const router = useRouter();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchTerm, setSearchTerm] = useState<string>("");
+
+  const handleClick = (id: string) => {
+    router.push(`/coin/${id}`);
+  };
 
   return (
     <div className="w-full py-[4rem] flex justify-center">
@@ -54,6 +60,9 @@ const MarketTable: React.FC<IMarketTableProps> = ({ allCoins }) => {
                 <tr
                   key={coin.id}
                   className="border-t border-zinc-200 hover:bg-teal-200 hover:cursor-pointer transition duration-200 ease-in-out"
+                  onClick={() => {
+                    handleClick(coin.id);
+                  }}
                 >
                   <td className="px-4 py-2 text-center border-r border-zinc-300">
                     {coin.market_cap_rank}

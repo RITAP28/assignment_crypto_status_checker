@@ -13,7 +13,7 @@ const Filter = () => {
         <PopoverTrigger>
           <button
             type="button"
-            className="px-4 text-sm py-0.5 rounded-sm bg-teal-500 font-bold text-white flex flex-row items-center gap-2 hover:cursor-pointer hover:bg-teal-600 transition duration-200 ease-in-out"
+            className="px-4 text-sm py-1 rounded-sm bg-teal-500 font-bold text-white flex flex-row items-center gap-2 hover:cursor-pointer hover:bg-teal-600 transition duration-200 ease-in-out"
           >
             <ListFilter className="w-5 h-5" />
             <span className="">Filters</span>
