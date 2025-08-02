@@ -61,8 +61,6 @@ export default function Home() {
       ) : (
         <MarketTable allCoins={allCoins} />
       )}
-
-      
     </div>
   );
 }

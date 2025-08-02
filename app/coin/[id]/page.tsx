@@ -1,23 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-// import { Line } from "react-chartjs-2";
-// import {
-//   Chart as ChartJS,
-//   LineElement,
-//   CategoryScale,
-//   LinearScale,
-//   PointElement,
-//   Tooltip,
-//   Legend,
-// } from "chart.js";
 import { ICoinDataProps } from "@/lib/interfaces";
 import axios from "axios";
 import LoadingDots from "@/lib/loadingDots";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { TrendingDown, TrendingUp } from "lucide-react";
-
 import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
 import {
   ChartConfig,
@@ -25,13 +14,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import Watchlist from "@/components/coin/watchlist";
 
 const chartConfig = {
   "1d": {
@@ -155,44 +138,49 @@ export default function Page() {
     <div className="w-full h-screen bg-zinc-800 p-1">
       <div className="w-full h-full rounded-lg bg-zinc-700 overflow-y-auto">
         <div className="p-6 max-w-5xl mx-auto space-y-6">
-          <div className="w-full flex flex-row gap-2">
-            <div className="">
-              <Image
-                alt=""
-                src={coin.image.large}
-                className=""
-                width={80}
-                height={80}
-              />
-            </div>
-            <div className="flex flex-col gap-1">
+          <div className="w-full flex flex-row gap-2 items-center justify-between">
+            <div className="flex flex-row gap-2">
               <div className="">
-                <h1 className="text-3xl font-bold text-teal-400">
-                  {coin.name} ({coin.symbol.toUpperCase()})
-                </h1>
+                <Image
+                  alt=""
+                  src={coin.image.large}
+                  className=""
+                  width={80}
+                  height={80}
+                />
               </div>
-              <div className="flex flex-row items-center gap-2">
-                <p className="text-xl font-bold text-white">
-                  ${market.current_price.usd.toLocaleString()}
-                </p>
-                <button
-                  type="button"
-                  className={`flex flex-row gap-2 px-2 py-0.5 rounded-2xl ${
-                    market.market_cap_change_percentage_24h > 0
-                      ? "bg-teal-400"
-                      : "bg-red-400"
-                  }`}
-                >
-                  {market.market_cap_change_percentage_24h > 0 ? (
-                    <TrendingUp className="text-white" />
-                  ) : (
-                    <TrendingDown className="text-white" />
-                  )}
-                  <span className="text-white font-bold">
-                    {market.market_cap_change_percentage_24h} %
-                  </span>
-                </button>
+              <div className="flex flex-col gap-1">
+                <div className="">
+                  <h1 className="text-3xl font-bold text-teal-400">
+                    {coin.name} ({coin.symbol.toUpperCase()})
+                  </h1>
+                </div>
+                <div className="flex flex-row items-center gap-2">
+                  <p className="text-xl font-bold text-white">
+                    ${market.current_price.usd.toLocaleString()}
+                  </p>
+                  <button
+                    type="button"
+                    className={`flex flex-row gap-2 px-2 py-0.5 rounded-2xl ${
+                      market.market_cap_change_percentage_24h > 0
+                        ? "bg-teal-400"
+                        : "bg-red-400"
+                    }`}
+                  >
+                    {market.market_cap_change_percentage_24h > 0 ? (
+                      <TrendingUp className="text-white" />
+                    ) : (
+                      <TrendingDown className="text-white" />
+                    )}
+                    <span className="text-white font-bold">
+                      {market.market_cap_change_percentage_24h} %
+                    </span>
+                  </button>
+                </div>
               </div>
+            </div>
+            <div className="">
+              <Watchlist coin={coin} />
             </div>
           </div>
 

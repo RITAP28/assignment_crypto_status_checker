@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import { WatchlistProvider } from "@/context/WatchlistContext";
+import { Toaster } from "@/components/ui/sonner";
 
 const space = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -20,7 +22,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={space.className}>
-        {children}
+        <WatchlistProvider>
+          {children}
+          <Toaster />
+        </WatchlistProvider>
       </body>
     </html>
   );

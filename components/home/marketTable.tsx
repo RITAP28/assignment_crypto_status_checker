@@ -1,10 +1,10 @@
 import { ICoinsProps } from "@/lib/interfaces";
-import Image from "next/image";
 import React, { useState } from "react";
 import PaginationButtons from "./paginationButtons";
 import Searchbar from "./searchbar";
 import Filter from "./filter";
 import { useRouter } from "next/navigation";
+import CoinTable from "../common/coinsTable";
 
 interface IMarketTableProps {
   allCoins: ICoinsProps[];
@@ -15,9 +15,7 @@ const MarketTable: React.FC<IMarketTableProps> = ({ allCoins }) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const handleClick = (id: string) => {
-    router.push(`/coin/${id}`);
-  };
+  const coinsToShow = currentPage === 1 ? allCoins.slice(0, 50) : allCoins.slice(51, 100);
 
   return (
     <div className="w-full py-[4rem] flex justify-center">
@@ -41,7 +39,7 @@ const MarketTable: React.FC<IMarketTableProps> = ({ allCoins }) => {
           />
         </div>
 
-        <table className="w-full border border-zinc-400 text-sm text-zinc-800">
+        {/* <table className="w-full border border-zinc-400 text-sm text-zinc-800">
           <thead className="bg-teal-400 text-gray-700 font-semibold">
             <tr>
               <th className="px-4 py-2 text-center">Rank</th>
@@ -149,7 +147,11 @@ const MarketTable: React.FC<IMarketTableProps> = ({ allCoins }) => {
                 </tr>
               ))}
           </tbody>
-        </table>
+        </table> */}
+        <CoinTable
+          coins={coinsToShow}
+          onRowClick={(id) => router.push(`/coin/${id}`)}
+        />
       </div>
     </div>
   );
