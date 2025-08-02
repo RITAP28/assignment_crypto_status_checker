@@ -1,6 +1,7 @@
 import { useDebounce } from "@/hooks/useDebounce";
 import { ICoinsProps } from "@/lib/interfaces";
 import LoadingDots from "@/lib/loadingDots";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 
 interface ISearchbarProps {
@@ -21,6 +22,7 @@ const Searchbar: React.FC<ISearchbarProps> = ({
   allCoins,
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -108,6 +110,10 @@ const Searchbar: React.FC<ISearchbarProps> = ({
                   <LoadingDots />
                 </p>
               </div>
+            ) : error ? (
+              <div className="py-1 flex justify-center">
+                <p className="text-red-500 font-bold">Something went wrong</p>
+              </div>
             ) : suggestions.length > 0 ? (
               suggestions.map((s, index) => (
                 <div
@@ -117,6 +123,7 @@ const Searchbar: React.FC<ISearchbarProps> = ({
                     setIsSearching(false);
                     setQuery("");
                     setSuggestions([]);
+                    router.push(`/coin/${s.id}`);
                   }}
                 >
                   {s.name}-{s.symbol.toUpperCase()}

@@ -36,7 +36,9 @@ export default function WatchlistPage() {
             You can view your saved coins here
           </p>
           {coins.length === 0 ? (
-            <p>No coins in watchlist</p>
+            <div className="w-full h-full flex items-center justify-center">
+              <p className="font-bold">No coins to view</p>
+            </div>
           ) : (
             <CoinTable
               coins={coins}
