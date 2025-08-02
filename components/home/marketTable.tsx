@@ -14,6 +14,7 @@ const MarketTable: React.FC<IMarketTableProps> = ({ allCoins }) => {
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [activeFilter, setActiveFilter] = useState<"price" | "24h%" | "market_cap" | "total_volume" | null>(null);
 
   const coinsToShow = currentPage === 1 ? allCoins.slice(0, 50) : allCoins.slice(51, 100);
 
@@ -32,13 +33,14 @@ const MarketTable: React.FC<IMarketTableProps> = ({ allCoins }) => {
         </div>
 
         <div className="w-full flex gap-2 justify-between items-center py-2">
-          <Filter />
+          <Filter activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
           <PaginationButtons
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
           />
         </div>
         <CoinTable
+          activeFilter={activeFilter}
           coins={coinsToShow}
           onRowClick={(id) => router.push(`/coin/${id}`)}
         />

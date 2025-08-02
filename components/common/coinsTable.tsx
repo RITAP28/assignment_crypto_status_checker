@@ -1,7 +1,6 @@
 // components/CoinTable.tsx
 "use client";
 import Image from "next/image";
-import { useWatchlist } from "@/context/WatchlistContext";
 
 interface Coin {
   id: string;
@@ -16,11 +15,30 @@ interface Coin {
 }
 
 interface CoinTableProps {
+  activeFilter?: "price" | "24h%" | "market_cap" | "total_volume" | null;
   coins: Coin[];
   onRowClick?: (coinId: string) => void;
 }
 
-export default function CoinTable({ coins, onRowClick }: CoinTableProps) {
+export default function CoinTable({
+  activeFilter,
+  coins,
+  onRowClick,
+}: CoinTableProps) {
+  const filteredCoins = [...coins];
+
+  if (activeFilter === "price") {
+    filteredCoins.sort((a, b) => b.current_price - a.current_price);
+  } else if (activeFilter === "24h%") {
+    filteredCoins.sort(
+      (a, b) => b.price_change_percentage_24h - a.price_change_percentage_24h
+    );
+  } else if (activeFilter === "market_cap") {
+    filteredCoins.sort((a, b) => b.market_cap - a.market_cap);
+  } else if (activeFilter === "total_volume") {
+    filteredCoins.sort((a, b) => b.total_volume - a.total_volume);
+  };
+
   return (
     <table className="w-full border border-zinc-400 text-sm text-zinc-800">
       <thead className="bg-teal-400 text-gray-700 font-semibold">
@@ -36,20 +54,24 @@ export default function CoinTable({ coins, onRowClick }: CoinTableProps) {
         </tr>
       </thead>
       <tbody>
-        {coins.map((coin) => {
+        {filteredCoins.map((coin) => {
           return (
             <tr
               key={coin.id}
               className="border-t border-zinc-200 hover:bg-teal-200 hover:cursor-pointer transition duration-200 ease-in-out"
               onClick={() => onRowClick?.(coin.id)}
             >
-
               <td className="px-4 py-2 text-center border-r border-zinc-300">
                 {coin.market_cap_rank}
               </td>
 
               <td className="px-4 py-2 border-r border-zinc-300">
-                <Image src={coin.image} alt={coin.name} width={24} height={24} />
+                <Image
+                  src={coin.image}
+                  alt={coin.name}
+                  width={24}
+                  height={24}
+                />
               </td>
 
               <td className="px-4 py-2 font-medium border-r border-zinc-300">

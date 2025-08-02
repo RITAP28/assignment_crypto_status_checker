@@ -83,7 +83,7 @@ export default function Page() {
 
       if (res.data) {
         // Format for recharts: [{ date, price }]
-        const pricesFormatted = res.data.prices.map((entry: number[]) => ({
+        const pricesFormatted = res.data?.prices.map((entry: number[]) => ({
           date: new Date(entry[0]).toLocaleDateString("en-US", {
             month: "short",
             day: "numeric",
