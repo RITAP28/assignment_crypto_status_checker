@@ -20,8 +20,8 @@ const MarketTable: React.FC<IMarketTableProps> = ({ allCoins }) => {
 
   return (
     <div className="w-full py-[4rem] flex justify-center">
-      <div className="w-[80%] flex flex-col px-4">
-        <div className="w-full flex flex-row justify-between">
+      <div className="w-full md:w-[80%] flex flex-col px-4">
+        <div className="w-full flex flex-col md:flex-row justify-between">
           <div className="font-bold py-2 text-xl text-teal-500">
             Coins Market List
           </div>

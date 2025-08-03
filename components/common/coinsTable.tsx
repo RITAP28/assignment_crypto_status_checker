@@ -37,35 +37,34 @@ export default function CoinTable({
     filteredCoins.sort((a, b) => b.market_cap - a.market_cap);
   } else if (activeFilter === "total_volume") {
     filteredCoins.sort((a, b) => b.total_volume - a.total_volume);
-  };
+  }
 
   return (
-    <table className="w-full border border-zinc-400 text-sm text-zinc-800">
-      <thead className="bg-teal-400 text-gray-700 font-semibold">
-        <tr>
-          <th className="px-4 py-2 text-center">Rank</th>
-          <th className="px-4 py-2 text-left">Icon</th>
-          <th className="px-4 py-2 text-left">Name</th>
-          <th className="px-4 py-2 text-left">Symbol</th>
-          <th className="px-4 py-2 text-right">Price</th>
-          <th className="px-4 py-2 text-right">24h %</th>
-          <th className="px-4 py-2 text-right">Market Cap</th>
-          <th className="px-4 py-2 text-right">Total Volume</th>
-        </tr>
-      </thead>
-      <tbody>
-        {filteredCoins.map((coin) => {
-          return (
+    <div className="w-full overflow-x-auto rounded-md border border-zinc-300">
+      <table className="w-full text-sm text-zinc-800">
+        <thead className="bg-teal-400 text-gray-700 font-semibold">
+          <tr>
+            <th className="px-2 sm:px-4 py-2 text-center">Rank</th>
+            <th className="px-2 sm:px-4 py-2 text-left">Icon</th>
+            <th className="px-2 sm:px-4 py-2 text-left">Name</th>
+            <th className="px-2 sm:px-4 py-2 text-left">Symbol</th>
+            <th className="px-2 sm:px-4 py-2 text-right">Price</th>
+            <th className="px-2 sm:px-4 py-2 text-right">24h %</th>
+            <th className="px-2 sm:px-4 py-2 text-right">Market Cap</th>
+            <th className="px-2 sm:px-4 py-2 text-right">Total Volume</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredCoins.map((coin) => (
             <tr
               key={coin.id}
               className="border-t border-zinc-200 hover:bg-teal-200 hover:cursor-pointer transition duration-200 ease-in-out"
               onClick={() => onRowClick?.(coin.id)}
             >
-              <td className="px-4 py-2 text-center border-r border-zinc-300">
+              <td className="px-2 sm:px-4 py-2 text-center border-r border-zinc-300">
                 {coin.market_cap_rank}
               </td>
-
-              <td className="px-4 py-2 border-r border-zinc-300">
+              <td className="px-2 sm:px-4 py-2 border-r border-zinc-300">
                 <Image
                   src={coin.image}
                   alt={coin.name}
@@ -73,21 +72,17 @@ export default function CoinTable({
                   height={24}
                 />
               </td>
-
-              <td className="px-4 py-2 font-medium border-r border-zinc-300">
+              <td className="px-2 sm:px-4 py-2 font-medium border-r border-zinc-300">
                 {coin.name}
               </td>
-
-              <td className="px-4 py-2 uppercase text-gray-500 border-r border-zinc-300">
+              <td className="px-2 sm:px-4 py-2 uppercase text-gray-500 border-r border-zinc-300">
                 {coin.symbol}
               </td>
-
-              <td className="px-4 py-2 text-right border-r border-zinc-300">
+              <td className="px-2 sm:px-4 py-2 text-right border-r border-zinc-300">
                 ${coin.current_price.toLocaleString()}
               </td>
-
               <td
-                className={`px-4 py-2 text-right font-medium ${
+                className={`px-2 sm:px-4 py-2 text-right font-medium ${
                   coin.price_change_percentage_24h > 0
                     ? "text-green-600"
                     : "text-red-600"
@@ -95,18 +90,16 @@ export default function CoinTable({
               >
                 {coin.price_change_percentage_24h.toFixed(2)}%
               </td>
-
-              <td className="px-4 py-2 text-right border-r border-zinc-300">
+              <td className="px-2 sm:px-4 py-2 text-right border-r border-zinc-300">
                 ${coin.market_cap.toLocaleString()}
               </td>
-
-              <td className="px-4 py-2 text-right border-r border-zinc-300">
+              <td className="px-2 sm:px-4 py-2 text-right border-r border-zinc-300">
                 ${coin.total_volume.toLocaleString()}
               </td>
             </tr>
-          );
-        })}
-      </tbody>
-    </table>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }

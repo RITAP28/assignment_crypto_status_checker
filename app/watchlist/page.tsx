@@ -28,7 +28,7 @@ export default function WatchlistPage() {
   }, [watchlist]);
 
   return (
-    <div className="w-full h-screen bg-teal-800 p-1">
+    <div className="w-full h-screen bg-zinc-800 p-1">
       <div className="w-full h-full rounded-md bg-teal-100 overflow-y-auto">
         <div className="p-4">
           <h1 className="text-2xl font-bold mb-4 text-teal-600">Watchlist</h1>

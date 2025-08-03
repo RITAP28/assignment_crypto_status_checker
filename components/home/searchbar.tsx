@@ -84,7 +84,7 @@ const Searchbar: React.FC<ISearchbarProps> = ({
     // search shall happen on the basis of name and symbol as asked in the assignment
     <div className="flex flex-row items-center gap-1">
       <div className="">
-        <p className="text-md font-semibold text-teal-600">Search a coin:</p>
+        <p className="text-md font-semibold text-teal-600">Search:</p>
       </div>
       <div ref={wrapperRef} className="md:w-[20rem] w-[18rem] relative">
         <input

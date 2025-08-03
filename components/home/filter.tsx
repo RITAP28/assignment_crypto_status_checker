@@ -5,6 +5,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import FilterButtons from "./filterButtons";
 
 const Filter = ({
   activeFilter,
@@ -39,50 +40,10 @@ const Filter = ({
           {/* price, 24h %, market cap, total volume */}
           {/* any parameter will be active at any given moment */}
           <div className="w-full flex flex-col gap-1">
-            <div className="w-full flex flex-row justify-between">
-              <p className="">Price</p>
-              <button
-                type="button"
-                className="px-2 py-0.5 rounded-sm bg-teal-400 hover:cursor-pointer hover:bg-teal-500 transition duration-200 ease-in-out"
-                onClick={() => setActiveFilter("price")}
-                disabled={activeFilter === "price"}
-              >
-                {activeFilter === "price" ? "Applied" : "Apply"}
-              </button>
-            </div>
-            <div className="w-full flex flex-row justify-between">
-              <p className="">24h %</p>
-              <button
-                type="button"
-                className="px-2 py-0.5 rounded-sm bg-teal-400 hover:cursor-pointer hover:bg-teal-500 transition duration-200 ease-in-out"
-                onClick={() => setActiveFilter("24h%")}
-                disabled={activeFilter === "24h%"}
-              >
-                {activeFilter === "24h%" ? "Applied" : "Apply"}
-              </button>
-            </div>
-            <div className="w-full flex flex-row justify-between">
-              <p className="">Market Cap</p>
-              <button
-                type="button"
-                className="px-2 py-0.5 rounded-sm bg-teal-400 hover:cursor-pointer hover:bg-teal-500 transition duration-200 ease-in-out"
-                onClick={() => setActiveFilter("market_cap")}
-                disabled={activeFilter === "market_cap"}
-              >
-                {activeFilter === "market_cap" ? "Applied" : "Apply"}
-              </button>
-            </div>
-            <div className="w-full flex flex-row justify-between">
-              <p className="">Total Volume</p>
-              <button
-                type="button"
-                className="px-2 py-0.5 rounded-sm bg-teal-400 hover:cursor-pointer hover:bg-teal-500 transition duration-200 ease-in-out"
-                onClick={() => setActiveFilter("total_volume")}
-                disabled={activeFilter === "total_volume"}
-              >
-                {activeFilter === "total_volume" ? "Applied" : "Apply"}
-              </button>
-            </div>
+            <FilterButtons type="Price" filter={"price"} activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+            <FilterButtons type="24h %" filter={"24h%"} activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+            <FilterButtons type="Market Cap" filter={"market_cap"} activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
+            <FilterButtons type="Total Volume" filter={"total_volume"} activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
             <div className="w-full flex flex-row justify-between pt-4">
               <p className="">Remove applied filters</p>
               <button
